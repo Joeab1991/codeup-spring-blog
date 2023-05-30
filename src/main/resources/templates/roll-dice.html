@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="/partials.html :: head">
-	<meta charset="UTF-8">
+<head>
+	<div th:replace="partials.html :: head" th:remove="tag">
+	</div>
 	<title>Roll Dice!</title>
 </head>
 <body>

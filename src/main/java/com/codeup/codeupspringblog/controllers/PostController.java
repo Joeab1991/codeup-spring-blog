@@ -1,58 +1,43 @@
 package com.codeup.codeupspringblog.controllers;
 
-import com.codeup.codeupspringblog.models.Posts;
+import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.repository.PostRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 public class PostController {
 
+	private final PostRepository postDao;
+
+	public PostController(PostRepository postDao) {
+		this.postDao = postDao;
+	}
+
 	@GetMapping("/posts/index")
-	public String posts() {
+	public String posts (Model model) {
+		model.addAttribute("posts", postDao.findAll());
 		return "posts/index";
 	}
 
 	@GetMapping("/posts/{id}")
-	public String postsId(@PathVariable int id, Model model)
+	public String postsId(@PathVariable long id, Model model)
 	{
-		Posts post = new Posts(id, "Test", "Body Test");
-		model.addAttribute("post", post);
-		return "posts/index";
-	}
-
-	@GetMapping("/posts/show")
-	public String postsShow(Model model)
-	{
-		Posts post = new Posts(1, "Test", "Body Test");
-		Posts post2 = new Posts(2, "Test2", "Body Test2");
-		List<Posts> posts = List.of(post, post2);
-		model.addAttribute("posts", posts);
+		model.addAttribute("post", postDao.getReferenceById(id));
 		return "posts/show";
 	}
 
-//	@GetMapping("/posts/create")
-//	@ResponseBody
-//	public String postsCreate() {
-//		return "view the form for creating a post";
-//	}
-//
-//	@PostMapping("/posts/create")
-//	@ResponseBody
-//	public String postsCreatePost() {
-//		return "create a new post";
-//	}
-
 	@RequestMapping(path = "/posts/create", method = {RequestMethod.GET, RequestMethod.POST})
-	@ResponseBody
 	public String postsCreate(HttpServletRequest request) {
 		if (request.getMethod().equals("GET")) {
-			return "view the form for creating a post";
+			return "posts/create";
 		} else {
-			return "create a new post";
+			Post post = new Post(request.getParameter("title"), request.getParameter("body"));
+			postDao.save(post);
+			return "redirect:/posts/index";
 		}
 	}
 }

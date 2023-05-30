@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials.html :: head">
-	<meta charset="UTF-8">
-	<title>Title</title>
+<head>
+	<div th:replace="partials.html :: head" th:remove="tag">
+	</div>
+	<title>View Post</title>
 </head>
 <body>
-	<nav th:replace="partials.html :: navbar">
-	</nav>
-	<div class="container-fluid text-center">
-		<div class="row justify-content-center">
-			<div class="col">
-				<h1>All Posts</h1>
-				<div th:if="${posts}">
-					<div th:each="post : ${posts}">
-						<h2 th:text="${post.title}"></h2>
-						<h3 th:text="${post.body}"></h3>
-						<a th:href="@{/posts/} + ${post.id}">View Post</a>
-					</div>
-					<br>
-				</div>
-				<div th:unless="${posts}">
-					<h2>There are no posts to display!</h2>
-				</div>
-			</div>
+<nav th:replace="partials.html :: navbar">
+</nav>
+<div class="container-fluid text-center">
+	<div class="row justify-content-center">
+		<div class="col">
+			<h1>Post Details</h1>
+			<h2 th:if="${post}">[[${post.title}]]</h2>
+			<h3 th:if="${post}">[[${post.body}]]</h3>
 		</div>
 	</div>
+</div>
 </body>
 </html>

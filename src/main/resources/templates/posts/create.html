@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<div th:replace="partials.html :: head" th:remove="tag">
+	</div>
+	<title>Create a Post</title>
+</head>
+<body>
+<nav th:replace="partials.html :: navbar">
+</nav>
+<div class="container-fluid text-center">
+	<div class="row justify-content-center">
+		<div class="col">
+			<h1>Go ahead and post something bud</h1>
+			<fieldset>
+				<legend>Post Details</legend>
+				<form method="POST" action="/posts/create">
+					<label for="title">Title</label>
+					<input id="title" name="title" type="text" placeholder="Title">
+					<label for="body">Body</label>
+					<textarea id="body" name="body" placeholder="Body"></textarea>
+					<button type="submit">Submit</button>
+				</form>
+			</fieldset>
+		</div>
+	</div>
+</div>
+</body>
+</html>
