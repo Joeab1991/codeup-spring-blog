@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="partials :: head">
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<nav th:replace="partials :: navbar">
+	</nav>
+	<h1>Create an Ad</h1>
+	<fieldset>
+		<legend>Ad Details</legend>
+		<form method="POST" action="/ads/create">
+			<label for="title">Title</label>
+			<input id="title" name="title" type="text" placeholder="Title">
+			<label for="description">Description</label>
+			<textarea id="description" name="description" placeholder="Description"></textarea>
+			<button type="submit">Submit</button>
+		</form>
+	</fieldset>
+
+</body>
+</html>

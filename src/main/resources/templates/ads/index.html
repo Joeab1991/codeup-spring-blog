@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials :: head">
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<nav th:replace="partials :: navbar">
+	</nav>
+	<h1>Ads</h1>
+		<ul>
+			<li th:each="ad : ${ads}">
+				<h2 th:text="${ad.title}">[[${ad.title}]]</h2>
+				<p th:text="${ad.description}">[[${ad.description}]]</p>
+			</li>
+		</ul>
+</body>
+</html>
