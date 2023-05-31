@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <div th:replace="partials.html :: head" th:remove="tag">
+  </div>
+  <title>Register</title>
+</head>
+<body>
+  <nav th:replace="partials.html :: navbar">
+  </nav>
+  <h1>Here's your all your posts bud</h1>
+  <div th:each="post : ${userPosts}">
+    <h2 th:text="${post.title}"></h2>
+    <p th:text="${post.body}"></p>
+  </div>
+  <footer th:replace="partials.html :: footer">
+  </footer>
+</body>
+</html>

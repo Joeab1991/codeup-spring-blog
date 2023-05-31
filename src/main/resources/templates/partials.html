@@ -8,8 +8,8 @@
   </div>
 </head>
 <body>
-  <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+  <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-info border border-info-subtle text-info-emphasis">
+    <div class="container-fluid p-0">
       <a class="navbar-brand" href="/posts/index">Spring Posts</a>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
@@ -22,12 +22,10 @@
       </div>
     </div>
   </nav>
-  <footer th:fragment="footer">
-    <div class="container-fluid bg-light-subtle">
-      <div class="row">
-        <div class="col">
-          <p>Footer</p>
-        </div>
+  <footer class="container-fluid bg-info border border-info-subtle text-info-emphasis position-absolute bottom-0 start-0" th:fragment="footer">
+    <div class="row m-0">
+      <div class="col p-0">
+        <p>Footer</p>
       </div>
     </div>
   </footer>

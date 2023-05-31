@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <div th:replace="partials.html :: head" th:remove="tag">
+    </div>
+	<title>Register</title>
+</head>
+<body>
+	<nav th:replace="partials.html :: navbar">
+	</nav>
+	<h1>Join if you want bud</h1>
+	<form action="/register" method="post">
+		<label for="username">Username</label>
+		<input type="text" name="username" id="username" placeholder="Enter your Username">
+		<br>
+		<label for="email">Email</label>
+		<input type="text" name="email" id="email" placeholder="Enter your Email">
+		<br>
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password" placeholder="Enter your Password">
+		<br>
+		<input type="submit" value="Register">
+	</form>
+</body>
+</html>
