@@ -8,15 +8,40 @@
 <body>
 	<nav th:replace="partials.html :: navbar">
 	</nav>
-	<div class="container-fluid text-center">
+	<div class="container-fluid">
 		<div class="row justify-content-center">
-			<h1 class="m-5">Post Details</h1>
+			<h1 class="m-5 text-center">Post Details</h1>
 			<div class="col d-flex justify-content-center">
-				<div class="card" style="min-height: 20rem; max-height: 20rem; max-width: 20rem">
-					<div class="card-body position-relative">
-						<h2 class="card-title mb-5" th:if="${post}">[[${post.title}]]</h2>
-						<p class="card-text" th:if="${post}">[[${post.body}]]</p>
-						<p class="card-text position-absolute bottom-0 start-50 translate-middle text-nowrap" th:text="'Email: ' + ${userEmail}"></p>
+				<div class="card border border-info-subtle" style="min-height: 17rem; max-width: 20rem">
+					<div class="card-body p-0">
+						<h2 class="card-title mb-3 mt-3 text-center ps-3 pe-3" th:if="${post}">[[${post.title}]]</h2>
+						<h5 class="card-subtitle mb-5 text-center ps-3 pe-3" th:if="${post}">[[${post.body}]]</h5>
+						<div class="border-top border-info-subtle">
+							<ul class="list-group-flush list-group overflow-scroll" style="max-height: 6rem" th:if="${comments}">
+								<li class="list-group-item text-body-secondary" th:each="comment : ${comments}">[[${comment.user.getUsername()}]] said "[[${comment.body}]]"</li>
+							</ul>
+							<ul th:unless="${comments}" class="list-group-flush list-group overflow-scroll" style="max-height: 6rem" >
+								<li class="text-center list-group-item text-body-secondary">There are no comments yet!</li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-footer bg-info-subtle">
+						<p class="card-text text-body-secondary text-nowrap" th:text="'Email: ' + ${userEmail}"></p>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid text-center mt-5">
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<fieldset>
+							<legend>Go ahead and comment if you want bud</legend>
+							<form method="POST" action="/posts/comment">
+								<label class="form-label fw-bold" for="body">Comment</label>
+								<textarea class="form-control form-control-lg" id="body" name="body" placeholder="Type Here:"></textarea>
+								<input type="hidden" name="post_id" th:value="${post.id}">
+								<button class="btn btn-info m-3" type="submit">Submit</button>
+							</form>
+						</fieldset>
 					</div>
 				</div>
 			</div>
