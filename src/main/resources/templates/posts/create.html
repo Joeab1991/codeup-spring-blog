@@ -3,7 +3,7 @@
 <head>
 	<div th:replace="partials.html :: head" th:remove="tag">
 	</div>
-	<title>Create a Post</title>
+	<title th:text="${post.id} ? 'Edit a Post' : 'Create a Post'"></title>
 </head>
 <body>
 	<nav th:replace="partials.html :: navbar">
@@ -11,14 +11,15 @@
 	<div class="container-fluid text-center">
 		<div class="row justify-content-center">
 			<div class="col">
-				<h1>Go ahead and post something bud</h1>
+				<h1 th:if="${post.id}">Edit post #[[${post.id}]] if you want bud</h1>
+				<h1 th:unless="${post.id}">Go ahead and post something bud</h1>
 				<fieldset>
 					<legend>Post Details</legend>
-					<form method="POST" action="/posts/create">
+					<form th:method="POST" th:action="${post.id} ?  @{/posts/create} : @{|/posts/${post.id}/edit|}" th:object="${post}">
 						<label for="title">Title</label>
-						<input id="title" name="title" type="text" placeholder="Title">
+						<input id="title" th:field="*{title}" type="text" placeholder="Title">
 						<label for="body">Body</label>
-						<textarea id="body" name="body" placeholder="Body"></textarea>
+						<textarea id="body" th:field="*{body}" placeholder="Body"></textarea>
 						<button type="submit">Submit</button>
 					</form>
 				</fieldset>

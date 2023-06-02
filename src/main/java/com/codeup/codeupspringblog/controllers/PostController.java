@@ -37,6 +37,7 @@ public class PostController {
 	{
 		model.addAttribute("post", postsDao.getReferenceById(id));
 		model.addAttribute("userEmail", postsDao.getReferenceById(id).getUser().getEmail());
+		model.addAttribute("numComments", commentsDao.findAllByPostId(id).size());
 		if (commentsDao.findAllByPostId(id).size() > 0) {
 			model.addAttribute("comments", commentsDao.findAllByPostId(id));
 		}
@@ -44,15 +45,30 @@ public class PostController {
 	}
 
 	@RequestMapping(path = "/posts/create", method = {RequestMethod.GET, RequestMethod.POST})
-	public String postsCreate(HttpServletRequest request) {
+	public String postsCreate(HttpServletRequest request, Model model, @ModelAttribute Post post) {
 		if (request.getMethod().equals("GET")) {
+			model.addAttribute("post", new Post());
 			return "posts/create";
 		} else {
 			User user = usersDao.getReferenceById(1L);
-			Post post = new Post(request.getParameter("title"), request.getParameter("body"), user);
+			post.setUser(user);
 			postsDao.save(post);
 			return "redirect:/posts/index";
 		}
+	}
+
+	@GetMapping("/posts/{id}/edit")
+	public String postsEdit(@PathVariable long id, Model model) {
+		model.addAttribute("post", postsDao.getReferenceById(id));
+		return "posts/create";
+	}
+
+	@PostMapping("/posts/{id}/edit")
+	public String postsEdit(@PathVariable long id, @ModelAttribute Post post) {
+		postsDao.getReferenceById(id).setTitle(post.getTitle());
+		postsDao.getReferenceById(id).setBody(post.getBody());
+		postsDao.save(postsDao.getReferenceById(id));
+		return "redirect:/posts/" + id;
 	}
 
 	@PostMapping("/posts/comment")

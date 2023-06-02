@@ -16,9 +16,10 @@
 					<div class="card-body p-0">
 						<h2 class="card-title mb-3 mt-3 text-center ps-3 pe-3" th:if="${post}">[[${post.title}]]</h2>
 						<h5 class="card-subtitle mb-5 text-center ps-3 pe-3" th:if="${post}">[[${post.body}]]</h5>
-						<div class="border-top border-info-subtle">
+						<div class="border-top border-info-subtle position-relative">
+							<span class="badge text-bg-info position position-absolute top-0 start-100 translate-middle z-3 ">[[${numComments}]]</span>
 							<ul class="list-group-flush list-group overflow-scroll" style="max-height: 6rem" th:if="${comments}">
-								<li class="list-group-item text-body-secondary" th:each="comment : ${comments}">[[${comment.user.getUsername()}]] said "[[${comment.body}]]"</li>
+								<li class="list-group-item text-body-secondary" th:each="comment : ${comments}">@[[${comment.user.getUsername()}]]: "[[${comment.body}]]"</li>
 							</ul>
 							<ul th:unless="${comments}" class="list-group-flush list-group overflow-scroll" style="max-height: 6rem" >
 								<li class="text-center list-group-item text-body-secondary">There are no comments yet!</li>
@@ -27,6 +28,7 @@
 					</div>
 					<div class="card-footer bg-info-subtle">
 						<p class="card-text text-body-secondary text-nowrap" th:text="'Email: ' + ${userEmail}"></p>
+						<a class="btn btn-info position-absolute top-100 start-50 translate-middle" th:href="@{|/posts/${post.id}/edit|}">Edit Post</a>
 					</div>
 				</div>
 			</div>
