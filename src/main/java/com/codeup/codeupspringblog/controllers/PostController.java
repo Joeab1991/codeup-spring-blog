@@ -6,6 +6,7 @@ import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repository.CommentRepository;
 import com.codeup.codeupspringblog.repository.PostRepository;
 import com.codeup.codeupspringblog.repository.UserRepository;
+import com.codeup.codeupspringblog.services.EmailService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
 	private final PostRepository postsDao;
-
+	private final EmailService emailService;
 	private final UserRepository usersDao;
 	private final CommentRepository commentsDao;
 
-	public PostController(PostRepository postsDao, UserRepository usersDao, CommentRepository commentsDao) {
+	public PostController(PostRepository postsDao, UserRepository usersDao, CommentRepository commentsDao, EmailService emailService) {
 		this.postsDao = postsDao;
 		this.usersDao = usersDao;
 		this.commentsDao = commentsDao;
+		this.emailService = emailService;
 	}
+
 
 	@GetMapping("/posts/index")
 	public String posts (Model model) {
@@ -53,6 +56,7 @@ public class PostController {
 			User user = usersDao.getReferenceById(1L);
 			post.setUser(user);
 			postsDao.save(post);
+			emailService.prepareAndSend(post, "Post Created", "Post has been created successfully");
 			return "redirect:/posts/index";
 		}
 	}

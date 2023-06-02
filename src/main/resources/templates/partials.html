@@ -9,21 +9,20 @@
   </div>
 </head>
 <body>
-  <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-info border border-info-subtle text-info-emphasis">
+  <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-info border border-info-subtle text-info-emphasis sticky-top">
     <div class="container-fluid p-0">
       <a class="navbar-brand" href="/posts/index">Spring Posts</a>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/posts/index">Home</a>
           <a class="nav-link" href="/roll-dice">Roll Dice</a>
           <a class="nav-link" href="/coffee">Coffee</a>
-          <a class="nav-link" href="/posts/index">Posts</a>
           <a class="nav-link" href="/posts/create">Make Posts</a>
         </div>
       </div>
     </div>
   </nav>
-  <footer class="container-fluid bg-info border border-info-subtle text-info-emphasis position-absolute bottom-0 start-0 text-center" th:fragment="footer">
+  <footer class="container-fluid bg-info border border-info-subtle text-info-emphasis  text-center sticky-bottom" th:fragment="footer">
     <div class="row m-0">
       <div class="col p-0">
         <p>Footer</p>
