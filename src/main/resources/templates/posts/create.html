@@ -8,7 +8,7 @@
 <body>
 	<nav th:replace="partials.html :: navbar">
 	</nav>
-	<div class="container-fluid text-center">
+	<div class="container-fluid text-center mb-5 pb-5">
 		<div class="row justify-content-center">
 			<h1 class="m-3" th:if="${post.id}">Edit post #[[${post.id}]] if you want bud</h1>
 			<h1 class="m-3" th:unless="${post.id}">Go ahead and post something bud</h1>

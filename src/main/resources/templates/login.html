@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<div th:replace="partials.html :: head" th:remove="tag">
+	</div>
+	<title>Login</title>
+</head>
+<body>
+	<nav th:replace="partials.html :: navbar">
+	</nav>
+	<div class="container-fluid mb-5">
+		<h1>Login for sure bud</h1>
+		<form th:action="@{/login}" th:method="post" th:object="${user}">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username" th:field="*{username}" placeholder="Enter your Username">
+			<br>
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password" th:field="*{password}" placeholder="Enter your Password">
+			<br>
+			<input type="submit" value="Login">
+		</form>
+	</div>
+	<footer th:replace="partials.html :: footer"></footer>
+</body>
+</html>

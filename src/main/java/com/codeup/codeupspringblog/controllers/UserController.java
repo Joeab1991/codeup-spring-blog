@@ -16,16 +16,25 @@ public class UserController {
 	}
 
 	@GetMapping("/register")
-	public String users() {
+	public String registerUsers(Model model, @ModelAttribute User user) {
+		model.addAttribute("user", new User());
 		return "/register";
 	}
 
 	@PostMapping("/register")
-	public String users(@RequestParam(name="username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
+	public String registerUsers(@RequestParam(name="username") String username, @RequestParam(name = "email") String email, @RequestParam(name = "password") String password) {
 		User user = new User(username, email, password);
 		userDao.save(user);
 		return "redirect:/posts/index";
 	}
+
+	@GetMapping("/login")
+	public String loginUsers(Model model) {
+		model.addAttribute("user", new User());
+		return "/login";
+	}
+
+
 
 	@GetMapping("/user/{id}/posts")
 	public String usersPosts(@PathVariable long id, Model model) {

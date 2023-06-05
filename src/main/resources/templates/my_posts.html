@@ -3,15 +3,17 @@
 <head>
   <div th:replace="partials.html :: head" th:remove="tag">
   </div>
-  <title>Register</title>
+  <title>My Posts</title>
 </head>
 <body>
   <nav th:replace="partials.html :: navbar">
   </nav>
   <h1>Here's your all your posts bud</h1>
-  <div th:each="post : ${userPosts}">
-    <h2 th:text="${post.title}"></h2>
-    <p th:text="${post.body}"></p>
+  <div class="container-fluid mb-5">
+    <div th:each="post : ${userPosts}">
+      <h2 th:text="${post.title}"></h2>
+      <p th:text="${post.body}"></p>
+    </div>
   </div>
   <footer th:replace="partials.html :: footer">
   </footer>
