@@ -26,6 +26,8 @@ public class User {
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
 	private List<Comment> comments;
 
+	private String confirmPassword;
+
 	public User() {
 	}
 
@@ -40,6 +42,14 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+
+	public User(long id, String username, String email, String password , String confirmPassword) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
 	}
 
 	public long getId() {
@@ -88,5 +98,13 @@ public class User {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }

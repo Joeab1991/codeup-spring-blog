@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-	<div th:replace="partials.html :: head" th:remove="tag">
-	</div>
-	<title>View Post</title>
+<head th:replace="~{partials.html :: head (title='View Post')}">
 </head>
 <body>
-	<nav th:replace="partials.html :: navbar">
+	<nav th:replace="~{partials.html :: navbar}">
 	</nav>
 	<div class="container-fluid mb-5 pb-5">
 		<div class="row justify-content-center">
@@ -37,7 +34,7 @@
 					<div class="col-4">
 						<fieldset>
 							<legend>Go ahead and comment if you want bud</legend>
-							<form method="POST" action="/posts/comment">
+							<form th:method="POST" th:action="@{/posts/comment}">
 								<label class="form-label fw-bold" for="body">Comment</label>
 								<textarea class="form-control form-control-lg" id="body" name="body" placeholder="Type Here:"></textarea>
 								<input type="hidden" name="post_id" th:value="${post.id}">
@@ -49,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-	<footer th:replace="partials.html :: footer">
+	<footer th:replace="~{partials.html :: footer}">
 	</footer>
 </body>
 </html>

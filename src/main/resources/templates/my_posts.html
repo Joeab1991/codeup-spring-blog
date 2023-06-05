@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <div th:replace="partials.html :: head" th:remove="tag">
-  </div>
-  <title>My Posts</title>
+<head th:replace="~{partials.html :: head (title='My Posts')}">
 </head>
 <body>
-  <nav th:replace="partials.html :: navbar">
+  <nav th:replace="~{partials.html :: navbar}">
   </nav>
   <h1>Here's your all your posts bud</h1>
   <div class="container-fluid mb-5">
@@ -15,7 +12,7 @@
       <p th:text="${post.body}"></p>
     </div>
   </div>
-  <footer th:replace="partials.html :: footer">
+  <footer th:replace="~{partials.html :: footer}">
   </footer>
 </body>
 </html>

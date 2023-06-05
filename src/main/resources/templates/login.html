@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-	<div th:replace="partials.html :: head" th:remove="tag">
-	</div>
-	<title>Login</title>
+<head th:replace="~{partials.html :: head (title='Login')}">
 </head>
 <body>
-	<nav th:replace="partials.html :: navbar">
+	<nav th:replace="~{partials.html :: navbar}">
 	</nav>
 	<div class="container-fluid mb-5">
 		<h1>Login for sure bud</h1>
+		<div th:if="${param.error}">
+			Invalid Username and Password.
+		</div>
+		<div th:if="${param.logout}">
+			You have been logged out.
+		</div>
 		<form th:action="@{/login}" th:method="post" th:object="${user}">
 			<label for="username">Username</label>
 			<input type="text" name="username" id="username" th:field="*{username}" placeholder="Enter your Username">
@@ -20,6 +23,6 @@
 			<input type="submit" value="Login">
 		</form>
 	</div>
-	<footer th:replace="partials.html :: footer"></footer>
+	<footer th:replace="~{partials.html :: footer}"></footer>
 </body>
 </html>

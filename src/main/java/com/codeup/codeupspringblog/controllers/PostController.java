@@ -8,6 +8,7 @@ import com.codeup.codeupspringblog.repository.PostRepository;
 import com.codeup.codeupspringblog.repository.UserRepository;
 import com.codeup.codeupspringblog.services.EmailService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +54,9 @@ public class PostController {
 			model.addAttribute("post", new Post());
 			return "posts/create";
 		} else {
-			User user = usersDao.getReferenceById(1L);
+			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			long id = user.getId();
+			user = usersDao.getReferenceById(id);
 			post.setUser(user);
 			postsDao.save(post);
 			emailService.prepareAndSend(post, "Post Created", "Post has been created successfully");
@@ -77,7 +80,9 @@ public class PostController {
 
 	@PostMapping("/posts/comment")
 	public String postsComment(@RequestParam(name="body") String body, @RequestParam(name="post_id") long post_id) {
-		User user = usersDao.getReferenceById(1L);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		long id = user.getId();
+		user = usersDao.getReferenceById(id);
 		Post post = postsDao.getReferenceById(post_id);
 		commentsDao.save(new Comment(body, user, post));
 		return "redirect:/posts/" + post_id;

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <div th:replace="partials.html :: head" th:remove="tag">
-    </div>
-	<title>Register</title>
+<head th:replace="~{partials.html :: head (title='Register')}">
 </head>
 <body>
-	<nav th:replace="partials.html :: navbar">
+	<nav th:replace="~{partials.html :: navbar}">
 	</nav>
 	<h1>Join if you want bud</h1>
 	<form th:action="@{/register}" th:method="post" th:object="${user}">
@@ -21,5 +18,7 @@
 		<br>
 		<input type="submit" value="Register">
 	</form>
+	<footer th:replace="~{partials.html :: footer}">
+	</footer>
 </body>
 </html>
